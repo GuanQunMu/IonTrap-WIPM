@@ -12,8 +12,9 @@ Homepage link: http://english.wipm.cas.cn/rh/rd/yzfzsys/bsqip/bsqipr/
 
 ###  Developers:
 
-1. Guanqun Mu     -Undergraduate in Wuhan University
-2. GeYi Ding     -Master in WIPM
+1. Guanqun Mu     -Undergraduate at Wuhan University, P. R China
+2. Kamran Rehan   -PhD at WIPM, CAS
+3. GeYi Ding     -Master at WIPM, CAS
 
 If you want to be a developer, please contact Guanqun Mu: **guanqun_mu@whu.edu.cn**
 
