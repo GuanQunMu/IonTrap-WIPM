@@ -6,7 +6,7 @@ import sys
 
 
 class GUITest2(EnvExperiment, object):
-    """GUIFinal"""
+    """GUI 1.0"""
     def build(self):
         pass
         
