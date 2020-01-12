@@ -1,4 +1,3 @@
-
 import numpy as np
 from artiq.experiment import *
 class Photon_Detection22(EnvExperiment):
