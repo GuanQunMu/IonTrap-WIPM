@@ -47,16 +47,16 @@ In addition, when naming, we can name the parameter NUM1.NUM2. In this way, NUM1
 4. In the `.build ()` function of a `.py` file, we need to enumerate all the interfaces to be involved in this file. If we involve ttl0 and ttl1 in this experiment, we will use the` build () `Function is written like this:
 
    ```python
-   self.setattr_device ("core")
-   self.setattr_device ("ttl0")
-   self.setattr_device ("ttl1")
-   ```
+   self.setattr_device("core")
+   self.setattr_device("ttl0")
+   self.setattr_device("ttl1")
+   ```
 
 5. In the `run ()` function, we usually add a line of code to refresh the timeline to prevent errors of time overflow type, as follows:
 
    ```python
-   self.core.reset ()
-   ```
+   self.core.reset()
+   ```
    
    ### TTL output
 
@@ -65,17 +65,18 @@ In addition, when naming, we can name the parameter NUM1.NUM2. In this way, NUM1
    For example, if we want ttl0 to be on for 5ms, we can write:
 
    ```python
-   self.ttl0.on ()
-   delay (5 * ms)
-   self.ttl0.off ()
-   
-   Or write it like this:
-   ```
+   self.ttl0.on()
+   delay(5*ms)
+   self.ttl0.off()
+   ```
+   
+   Or:
+   
 
-   ```python
-   self.ttl0.pulse (5 * ms)
-   ```
-
+   ```python
+   self.ttl0.pulse(5*ms)
+   ```
+   
    If we want to control multiple ttl signals, for example ttl0 and ttl1 are turned on for 5ms at the same time, we can do this:
 
    ```python
