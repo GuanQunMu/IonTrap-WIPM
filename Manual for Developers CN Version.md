@@ -1,30 +1,8 @@
-# 安装（已完成）
+# Manual for Developers(CN Version)
 
-1. 安装ANACONDA（注：最新版的ANACONDA与artiq不兼容）
-2. 用CONDA新建artiq-main环境
-3. 将电脑切换至artiq-main环境
-4. 联网时，在`artiq-main`环境下从ANACONDA官网的`m-labs/packages `里选择artiq 包，用`conda install XXX`的方式下载   （注：不要用`pip install XXX`下载！因为artiq有一部分是用C++写的，用pip安装会导致安装中断）
-5. 同理，下载`artiq-kc705-nist_clock ，artiq-kc705-nist_qc2 ，artiq-kasli-tester ，artiq-kasli-wipm `
+## Dashboard Fuction
 
-
-
-# 运行前的准备（已完成）
-
-1. 从artiq官网提供的github地址中下载包至本地
-2. 从`example/master `文件夹中拷贝出`device_db.py`文件
-3. 在与`device_db.py`同一文件夹下新建`repository`文件夹
-
-
-
-# 操作
-
-### dashboard的启动
-
-点击桌面右上角的`dashboard.bat `脚本文件
-
-脚本内容详情见桌面上的`artiq_dashboard`文件夹中的`artiq-dashboard.md`文件
-
-### dashboard右侧的任务栏（Explorer）
+### Dashboard Explorer
 
 1. 任务栏中现实的任务的设置：
 
@@ -38,14 +16,14 @@
 
 此外，引用不同文件里的类和函数的无效。但是同一个文件内部的类和函数可以引用。
 
-### dashboard的实时监控GUI界面（Applets）
+### Dashboard Applets
 
 1.  实时监控界面可以右键点击以新建显示界面，这个监控界面关联的数据是我们的dataset中的数据，在我们GUI 界面的任务名称里重命名即可更改我们想显示的数据  
 
 2.  此外，假如你想自己写面板，你可以参考artiq的applets下的源代码仿写，（此时应当用到python的pyqt包），并将写好的面板代码放到artiq的applets源代码的同一文件夹下。  
 
 
-## dashboard左侧的datasets
+## Dashboard Datasets
 
 datasets 中包含着实验中涉及到的参数。在我们提交任务的代码中，我们可以利用`self.set_dataset()`函数来将我们的程序内部的参数传递到我们的datasets中，例如：
 
@@ -59,7 +37,7 @@ self.set_dataset("NUM1", 5, broadcast=True)
 
 
 
-# 代码的书写规则
+## 代码的书写规则
 
 ### 代码的框架
 
@@ -123,7 +101,7 @@ self.set_dataset("NUM1", 5, broadcast=True)
 
 2. 需要格外注意的是，在控制TTL的时候，一定要格外注意我们控制的TTL接口究竟是输出接口还是输入接口。假如是输入接口，我们就不能通过代码控制这个TTL接口的输出，转而只能做TTL输入信号的分析。
 
-3. 此外，还要说明的是，TTL的名称我们可以随意更改，若想更改TTL的名称，我们可以在`device_db.py`中更改，并且在执行代码中，我们也要相应地更改TTL的名称，例如：我们在`device_db.py`中将TTL的名称改为了729，则在执行代码的时候，我们需要将代码改成类似`self.729.on()`的形式。（理论上可行，但我没有尝试过）
+3. 此外，还要说明的是，TTL的名称我们可以随意更改，若想更改TTL的名称，我们可以在`device_db.py`中更改，并且在执行代码中，我们也要相应地更改TTL的名称，例如：我们在`device_db.py`中将TTL的名称改为了729，则在执行代码的时候，我们需要将代码改成类似`self.729.on()`的形式。
 
 
 ### TTL 输入
@@ -199,48 +177,39 @@ self.set_dataset("NUM1", 5, broadcast=True)
 3. 扩展示例见` repository 中的 paulse_shaping.py`
 
 
+## 如何在Artiq内设计GUI界面
 
+我们采取的方案为：自定义的GUI仅仅起到更改Dashboard中dataset中数据的功能。除此之外，它不承担任何功能。
 
-# 现已完工的项目
+制作一个GUI需要以下步骤：
 
-### Rabi Scan
+在QTdesigner中制作.ui文件，将.ui文件翻译为.py文件，在.py文件中添加功能，更改.py文件以适配Artiq编译器
 
-与Rabi scan 有关的代码在 `initial_rabi.py` 和 `Run_rabi.py` 这两个文件中。这两个文件分别对应于 `initial for Rabi` 和 ` Run As Rabi` 这两个任务
+1. 在QTdesigner中制作.ui文件
 
-在进行Rabi scan的时候，我们要如下执行：
+安装PYQT5，在命令行中输入：
 
-1. 先点击 `initial for Rabi` 的任务，于是可以弹出这个人物的GUI页面，在这个任务的GUI页面中，我们可以定义我们在Rabi Scan的时候的一些参数，例如doppler cooling的时长，sideband cooling的时长，操作次数等等。
+'$ pip install PyQt5'
 
-2. 提交 `initial for Rabi` 这个任务，这些你定义过的参数会保存在dashboard里的Dataset中。
+'$ pip install PyQt5-tools'
 
-3. 点击并提交 ` Run As Rabi` 这个任务，在这个任务中，系统会自动读取dataset中你定义过的参数，并根据这些参数自动在实验中执行。光子计数器收集到的光子数会实时赋予给 Dataset 中的 Count_Num这个参数。
+前往QTdesigner安装地址：\Anaconda3\Scripts\pyqt5designer.exe，打开QTdesigner
 
-（这个项目我没有经过硬件上的测试，预计会有一些小的bug，但不会有大的bug）
+制作GUI后保存为XXX.ui文件
 
-### Zeeman Scan
+2. 将.ui文件翻译为.py文件
 
-与Zeeman scan 有关的代码在 `initial_zeeman.py` 和 `Run_zeeman.py` 这两个文件中。这两个文件分别对应于 `initial for Zeeman` 和 ` Run As Zeeman` 这两个任务
+'$ python -m PyQt5.uic.pyuic -o XXX.py XXX.ui' 或者 '$ pyuic5 -o XXX.py XXX.ui'
 
-在进行Rabi scan的时候，我们要如下执行：
+3. 在.py文件中添加功能
 
-1. 先点击 `initial for Zeeman` 的任务，于是可以弹出这个人物的GUI页面，在这个任务的GUI页面中，我们可以定义我们在Zeeman Scan的时候的一些参数，例如doppler cooling的时长，sideband cooling的时长，操作次数等等。
+在类中的setupUi 函数后面添加功能，比如按钮点击后的效果等等
 
-2. 提交 `initial for Zeeman` 这个任务，这些你定义过的参数会保存在dashboard里的Dataset中。
+4. 更改.py文件以适配Artiq编译器
 
-3. 点击并提交 ` Run As Zeeman` 这个任务，在这个任务中，系统会自动读取dataset中你定义过的参数，并根据这些参数自动在实验中执行。光子计数器收集到的光子数会实时赋予给 Dataset 中的 Count_Num这个参数。
+将类中的所有函数拷贝并覆盖到demo文件中的所有同名函数。
 
-（这个项目我没有经过硬件上的测试，预计会有一些小的bug，但不会有大的bug）
-
-### 脉冲塑性
-
-脉冲塑性的代码在 `paulse_shaping.py`  文件中。
-
-在代码的注解中，正如所示，在 `self.P` 数组中更改元素可以改变脉冲塑性的形状，并可以通过GUI页面来设置我们塑性的取点间隔和取点个数。
-
-将脉冲塑性的文件代码更改好之后，就可以将脉冲塑性的代码粘贴到Rabi Scan的对应组件中。
-
-这个项目我在硬件上测试过，这可以完美运行。
-
+demo文件链接：/Demo_List/GUI_Demo
 
 
 # 问题与解答
