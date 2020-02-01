@@ -73,7 +73,7 @@ And go to ' Manual for Developers.md ' for more details.
 
 2. GUI will come out, change parameters (Rabi Scan/Zeeman Scan/...) , select one choice in ' Selection ' part, then Click ' Submit '.
 
-<img src="https://github.com/GuanQunMu/IonTrap-WIPM/blob/master/Pictures/GUI1.0.png"/>
+<img src="https://github.com/GuanQunMu/IonTrap-WIPM/blob/master/Pictures/GUI1.0.png" width="200"/>
 
 3. Go to the ' Explorer ' part in dashboard, select the ' Run ' operation, then click ' Submit ' button.
 
