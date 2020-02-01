@@ -8,7 +8,7 @@ This project can be used to realize experimental operations of a single qubit in
 
   By controlling switches, frequency and amplitude of the laser acting on the ions, we can control the quantum state of the ions in ion traps through the principle of quantum optics. we choose FPGA as the experimental control hardware. 
 
-  M-labs' Artiq integrates FPGA, AOM and DDS, and can control experimental processes through Python. based on this,we designed some functions to realize rabi scan and zeeman scan and made a GUI, by which physicists can control experiment much easily.
+  M-labs' Artiq integrates FPGA, AOM and DDS, and can control experimental processes through Python. based on this,we designed some functions to realize rabi scan and zeeman scan and made a customized GUI, by which physicists can control experiment much easily.
 
 ![image](https://github.com/GuanQunMu/IonTrap-WIPM/blob/master/Pictures/Dashboaed.png)
 
@@ -44,17 +44,11 @@ And go to ' Manual for Developers.md ' for more details.
 ### 2. Preparing
 
 1. Creating a new folder, name it with `Artiq_WIPM`.
-
 2. Create a new folder called `repository` inside `Artiq_WIPM`.
-
-3. Copy the file `device_db.py` into the `Artiq_WIPM`. This file is always given by M-Labs guys.
-
+3. Copy the file `device_db.py` into the `Artiq_WIPM`. This file should be given by M-Labs guys.
 4. Click the button ' Clone or download ' of this project.
-
 5. Click ' Download ZIP '.
-
 6. Uncompress the .zip file, copy the folder `repository` to recover the same name folder in `Artiq_WIPM`.
-
 7. Command Prompt:
 
     `$ activate artiq  `
@@ -63,15 +57,12 @@ And go to ' Manual for Developers.md ' for more details.
 
     `$ artiq_main`
 
-    Now artiq_master is done.
-
 8. Turn on another Command Prompt:
 
     `$ activate artiq`
 
     `$ artiq_dashboard`
 
-    Now the dashboard is done.
 
 
 
