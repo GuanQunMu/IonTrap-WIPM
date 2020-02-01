@@ -10,7 +10,7 @@ This project can be used to realize experimental operations of a single qubit in
 
   M-labs' Artiq integrates FPGA, AOM and DDS, and can control experimental processes through Python. based on this,we designed some functions to realize rabi scan and zeeman scan and made a GUI, by which physicists can control experiment much easily.
 
-![image](https://github.com/AngelSXD/sxd_first_repository/blob/master/images/20160615165142.png)
+![image](https://github.com/GuanQunMu/IonTrap-WIPM/blob/master/Pictures/Dashboaed.png)
 
 ###  Copyright:
 
