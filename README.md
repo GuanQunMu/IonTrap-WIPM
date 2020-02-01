@@ -1,6 +1,6 @@
 # Control System for Quantum Information Process in Ion Traps
 
-Updated in 10/JAN/2020, This project can realize rabi scan and zeeman scan for a single qubit in ion trap. It also contains paulse shaping part and GUI.
+Updated on February 1, 2020, this project can be used to realize experimental operations of a single qubit in the ion trap, including rabi scan, zeeman scan, and pulse shaping for rabi scan. Otherwise, for the convenience of experiment, we also Designed a convenient GUI.
 
 ## 1. Introduction
 
