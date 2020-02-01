@@ -187,13 +187,13 @@ self.set_dataset("NUM1", 5, broadcast=True)
 
 ### 在QTdesigner中制作.ui文件
 
-安装PYQT5，在命令行中输入：
+安装PyQt5，在命令行中输入：
 
 `$ pip install PyQt5`
 
 `$ pip install PyQt5-tools`
 
-前往QTdesigner安装地址：\Anaconda3\Scripts\pyqt5designer.exe，打开QTdesigner
+前往QTdesigner安装地址：\Anaconda3\Scripts\pyqt5designer.exe，打开pyqt5designer.exe
 
 制作GUI后保存为XXX.ui文件
 
@@ -203,13 +203,17 @@ self.set_dataset("NUM1", 5, broadcast=True)
 
 ### 在.py文件中添加功能
 
+找到新生成的XXX.py文件，用记事本打开
+
 在类中的setupUi 函数后面添加功能，比如按钮点击后的效果等等
 
 ### 更改.py文件以适配Artiq编译器
 
-将类中的所有函数拷贝并覆盖到demo文件中的所有同名函数。
+将类中的所有函数拷贝并覆盖Demo文件中的所有同名函数。(Demo文件链接：`GuanQunMu/IonTrap-WIPM/Demo_List/GUI_Demo`)
 
-demo文件链接：`/Demo_List/GUI_Demo`
+将更改后的文件放于repository文件夹下，在dashboard中提交操作
+
+
 
 
 # 问题与解答
