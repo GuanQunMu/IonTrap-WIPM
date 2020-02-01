@@ -8,20 +8,19 @@ This project can be used to realize experimental operations of a single qubit in
 
 ###  Copyright:
 
-Belongs to WIPM MangFeng Ion Trap Group.
+MangFeng Ion Trap Group, WIPM, CAS, P. R China
 
 Homepage link: http://english.wipm.cas.cn/rh/rd/yzfzsys/bsqip/bsqipr/
 
 ###  Developers:
 
 1. Guanqun Mu     -Undergraduate at Wuhan University, P. R China
-2. Kamran Rehan   -PhD at WIPM, CAS
 3. GeYi Ding     -Master at WIPM, CAS
+2. Kamran Rehan   -PhD at WIPM, CAS
 
-If you want to be a developer, please contact Guanqun Mu: **guanqun_mu@whu.edu.cn**
+If you have some questions or want to be a developer, please contact Guanqun Mu: **guanqun_mu@whu.edu.cn**
 
 And go to ' Manual for Developers.md ' for more details.
-
 
 
 
