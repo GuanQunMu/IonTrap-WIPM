@@ -69,11 +69,14 @@ And go to ' Manual for Developers.md ' for more details.
 
 ### 3. Getting Start
 
-1. Go to the ' Explorer ' part in dashboard, select the ' GUIFinal ' operation, then click ' Submit ' button.
+1. Go to the ' Explorer ' part in dashboard, click the ' GUIFinal ' operation, set the pipeline to 'GUI', then click ' Submit ' button.
 
 2. GUI will come out, change parameters (Rabi Scan/Zeeman Scan/...) , select one choice in ' Selection ' part, then Click ' Submit '.
 
-3. To be continued...
+https://github.com/GuanQunMu/IonTrap-WIPM/blob/master/Pictures/GUI1.0.png
 
+3. Go to the ' Explorer ' part in dashboard, select the ' GUIFinal ' operation, then click ' Submit ' button.
+
+4. After opreation done, photon count picture will appear at Applet.
 
 
