@@ -1,6 +1,6 @@
 # Manual for Developers(English Version)
 
-## Dashboard Fuction
+## Dashboard Function
 
 ### Dashboard Explorer
 
@@ -46,54 +46,60 @@ In addition, when naming, we can name the parameter NUM1.NUM2. In this way, NUM1
 
 4. In the `.build ()` function of a `.py` file, we need to enumerate all the interfaces to be involved in this file. If we involve ttl0 and ttl1 in this experiment, we will use the` build () `Function is written like this:
 
-   ```python
+   ```python
    self.setattr_device("core")
    self.setattr_device("ttl0")
    self.setattr_device("ttl1")
    ```
 
+   
+
+
 5. In the `run ()` function, we usually add a line of code to refresh the timeline to prevent errors of time overflow type, as follows:
 
-   ```python
+   ```python
    self.core.reset()
    ```
-   
+
+
+
+
    ### TTL output
 
 1. TTL control code can only run under @kernel. When controlling the output of TTL, the opening of ttl can be controlled by `self.ttl.on ()`, the closing of ttl can be controlled by `self.ttl.off ()`, and the intermediate time can be delayed (time * ms) to control.
 
    For example, if we want ttl0 to be on for 5ms, we can write:
 
-   ```python
-   self.ttl0.on()
-   delay(5*ms)
-   self.ttl0.off()
+   ```python
+self.ttl0.on()
+delay(5*ms)
+self.ttl0.off()
    ```
-   
+
    Or:
-   
+
 
    ```python
-   self.ttl0.pulse(5*ms)
+self.ttl0.pulse(5*ms)
    ```
-   
+
    If we want to control multiple ttl signals, for example ttl0 and ttl1 are turned on for 5ms at the same time, we can do this:
 
-   ```python
-   self.ttl0.on ()
-   self.ttl1.on ()
-   delay (5 * ms)
-   self.ttl0.off ()
-   self.ttl1.off ()
-   ```
+   ```python
+self.ttl0.on ()
+self.ttl1.on ()
+delay (5 * ms)
+self.ttl0.off ()
+self.ttl1.off ()
+   ```
 
    Or do this:
 
-   ```python
-   with parallel:
-   self.ttl0.pulse (5 * ms)
-       self.ttl1.pulse (5 * ms)
-   ```
+   ```python
+with parallel:
+self.ttl0.pulse (5 * ms)
+    self.ttl1.pulse (5 * ms)
+   ```
 
    There is a Demo in `GuanQunMu/IonTrap-WIPM/Demo_List/TTL_Output_Demo.py` file. This file has been tested to work perfectly. For other examples, see the examples on the artiq website.
 
@@ -105,24 +111,23 @@ In addition, when naming, we can name the parameter NUM1.NUM2. In this way, NUM1
 
 1. ttl input can only be run under @kernel. The ttl input module is generally used for photon detection. During the photon detection process, we connect the ttl signal output by the photon detector to the ttl input signal interface of ARTIQ. We can count the rise of the ttl signal on the PC. There are as many edges as we can read out how many photons are detected. On the PC side, we need to set the ttl signal detection time that we are going to process and count how many ttl signals are rising. If we want to see how many rising edges are within 5ms, we can write:
 
-   ```python
-   self.ttl4.gate_rising (5 * ms)
-   count = self.ttl4.count ()
-   ```
+   ```python
+   self.ttl4.gate_rising (5 * ms)
+   count = self.ttl4.count ()
+   ```
+
 
    In this way, the number of rising edges of the input ttl signal can be assigned to count in 5ms.
 
 2. It is worth noting that when we write like this, it means that within 5ms of our ttl input signal detection, we can do nothing else. If we want to detect the ttl input signal, When doing some other operations, we can usually write:
 
-   ```python
-   with parallel:
-   self.ttl4.gate_rising (self.DETECTION_time * ms)
-   Ranch
-       with sequential:
-           (the code you want to do at the same time ...)
-   
-   count = self.ttl4.count ()
-   ```
+   ```python
+   with parallel:
+   self.ttl4.gate_rising (self.DETECTION_time * ms)
+       with sequential:
+           (the code you want to do at the same time ...)
+       count = self.ttl4.count 
+   ```
 
    Additional examples can be found in the `GuanQunMu / IonTrap-WIPM / Demo_List / TTL_Input_Demo.py` file, which has been tested to work perfectly.
 
@@ -130,42 +135,43 @@ In addition, when naming, we can name the parameter NUM1.NUM2. In this way, NUM1
 
 1. The output of dds can only be run under @kernel. The opening of dds can be written as follows:
 
-   ```python
-   self.urukul1_ch0.sw.on ()
-   ```
+   ```python
+   self.urukul1_ch0.sw.on ()
+   ```
+
 
    Regarding the operation of `.sw.on ()`, I have not found it on the official website. This execution method can be run on the hardware of the development version of artiq, but whether it can run on the new artiq in our laboratory needs further testing .
 
 2. Regarding the amplitude adjustment of the dds signal, add that we want to adjust the dds power named `urukul1` to 8 dBm, we can do this:
 
-   ```python
-   self.urukul1_ch0.set_att (2)
-   ```
+   ```python
+   self.urukul1_ch0.set_att (2)
+   ```
 
    This means that the power is adjusted to `10-2 = 8 dBm`
 
 3. Regarding the frequency adjustment of the dds signal, if we want to adjust the dds output named `urukul1` to 1000kHz, we can write:
 
-   ```python
-   self.urukul1_ch0.set (1000 * kHz)
-   ```
+   ```python
+   self.urukul1_ch0.set (1000 * kHz)
+   ```
+   
    Additional examples can be found in the `GuanQunMu / IonTrap-WIPM / Demo_List / DDS_Demo.py` file. This file has been tested to work perfectly.
 
 ### Pulse Shaping
 
 1. Pulse shaping is done to prevent the AC-Stark effect in the operation of quantum information. It is essentially a DDS output in the experimental control, but what we need to add is that we will implement the DDS amplitude change over time during a Rabi oscillation operation cycle.
 
-   ```python
-   self.urukul1_ch0.sw.on ()
-   t = 0
-   while t <10:
-   self.urukul1_ch0.set_att (float (t))
-   delay (300 * us)
-       
-   t + = 1
-       
-   self.urukul1_ch0.sw.off ()
-   ```
+   ```python
+   self.urukul1_ch0.sw.on ()
+   t = 0
+   while t <10:
+   	self.urukul1_ch0.set_att (float (t))
+   	delay (300 * us)
+   	t + = 1
+   
+   self.urukul1_ch0.sw.off ()
+   ```
 
    This means that we adjust the amplitude of the DDS to `10-0 = 10 dBm` for 300us, and then adjust the amplitude to` 10-1 = 9 dBm`, and so on until the dBm is adjusted to 1 dBm.
 
@@ -173,7 +179,9 @@ In addition, when naming, we can name the parameter NUM1.NUM2. In this way, NUM1
 
 3. For an extension example, see `GuanQunMu / IonTrap-WIPM / Demo_List / Pause_Shaping_Demo.py`
 
-## How to design a GUI interface in Artiq
+   
+
+## How to design a GUI  in Artiq
 
 The solution we take is: The custom GUI only has the function of changing the data in the dataset in the Dashboard. Other than that, it does not assume any function.
 
@@ -197,11 +205,15 @@ Save as XXX.ui file after making GUI
 
 `$ python -m PyQt5.uic.pyuic -o XXX.py XXX.ui` or` $ pyuic5 -o XXX.py XXX.ui`
 
+
+
 ### Adding functionality to .py files
 
 Find the newly generated XXX.py file and open it with Notepad
 
 Add functions after the setupUi function in the class, such as the effect of a button click, etc.
+
+
 
 ### Changing .py file to fit Artiq compiler
 
@@ -209,13 +221,15 @@ Copy all functions in the class and overwrite all functions with the same name i
 
 Put the changed files in the repository folder and submit the operation in the dashboard
 
-# Questions and Answers
+
+
+# Q&A
 
 ### What's the matter of compiling and running under @kernel? What exactly is the error of the time overflow type?
 
 The dialogue is as follows:
 
-** Q: **
+**Q: **
 
 As shown below, if we submit such a piece of code, the calculation of this line of code takes time for `a = 1 + 1`. And because the code is executed in order from top to bottom, then due to the existence of this line of code, will the actual output TTL last longer than our set 10ms?
 
@@ -226,7 +240,7 @@ a = 1 + 1
 self.ttl0.off ()
 ```
 
-** A: **
+**A: **
 
 No more than 10 ms. ARTIQ's kernel is real-time. There are two mechanisms to ensure real-time characteristics:
 
