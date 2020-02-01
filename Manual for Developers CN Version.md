@@ -185,31 +185,31 @@ self.set_dataset("NUM1", 5, broadcast=True)
 
 在QTdesigner中制作.ui文件，将.ui文件翻译为.py文件，在.py文件中添加功能，更改.py文件以适配Artiq编译器
 
-1. 在QTdesigner中制作.ui文件
+### 在QTdesigner中制作.ui文件
 
 安装PYQT5，在命令行中输入：
 
-'$ pip install PyQt5'
+`$ pip install PyQt5`
 
-'$ pip install PyQt5-tools'
+`$ pip install PyQt5-tools`
 
 前往QTdesigner安装地址：\Anaconda3\Scripts\pyqt5designer.exe，打开QTdesigner
 
 制作GUI后保存为XXX.ui文件
 
-2. 将.ui文件翻译为.py文件
+### 将.ui文件翻译为.py文件
 
-'$ python -m PyQt5.uic.pyuic -o XXX.py XXX.ui' 或者 '$ pyuic5 -o XXX.py XXX.ui'
+`$ python -m PyQt5.uic.pyuic -o XXX.py XXX.ui` 或者 `$ pyuic5 -o XXX.py XXX.ui`
 
-3. 在.py文件中添加功能
+### 在.py文件中添加功能
 
 在类中的setupUi 函数后面添加功能，比如按钮点击后的效果等等
 
-4. 更改.py文件以适配Artiq编译器
+### 更改.py文件以适配Artiq编译器
 
 将类中的所有函数拷贝并覆盖到demo文件中的所有同名函数。
 
-demo文件链接：/Demo_List/GUI_Demo
+demo文件链接：`/Demo_List/GUI_Demo`
 
 
 # 问题与解答
