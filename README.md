@@ -6,7 +6,9 @@ This project can be used to realize experimental operations of a single qubit in
 
 ## 1. Introduction
 
-By controlling switches, frequency and amplitude of the laser acting on the ions, we can control the quantum state of the ions in ion traps through the principle of quantum optics. we choose FPGA as the experimental control hardware. M-labs' Artiq integrates FPGA, AOM and DDS, and can control experimental processes through Python. based on this,we designed some functions to realize rabi scan and zeeman scan and made a GUI, by which physicists can control experiment much easily.
+    By controlling switches, frequency and amplitude of the laser acting on the ions, we can control the quantum state of the ions in ion traps through the principle of quantum optics. we choose FPGA as the experimental control hardware. 
+
+    M-labs' Artiq integrates FPGA, AOM and DDS, and can control experimental processes through Python. based on this,we designed some functions to realize rabi scan and zeeman scan and made a GUI, by which physicists can control experiment much easily.
 
 ###  Copyright:
 
