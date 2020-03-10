@@ -1,4 +1,4 @@
-# Control System for Quantum Information Process in Ion Traps
+# The Control System for Quantum Information Process in Ion Traps
 
 Updated on February 1, 2020.
 
