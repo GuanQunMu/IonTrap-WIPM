@@ -12,13 +12,13 @@ This project can be used to realize experimental operations of a single qubit in
 
 ![image](https://github.com/GuanQunMu/IonTrap-WIPM/blob/master/Pictures/Dashboaed.png)
 
-###  Copyright:
+###  Research group:
 
 MangFeng Ion Trap Group, WIPM, CAS, P. R China
 
 Homepage link: http://english.wipm.cas.cn/rh/rd/yzfzsys/bsqip/bsqipr/
 
-###  Developers:
+###  Contributors:
 
 1. Guanqun Mu     -Undergraduate at Wuhan University, P. R China
 3. GeYi Ding     -Master at WIPM, CAS
@@ -30,7 +30,7 @@ And go to ' Manual for Developers.md ' for more details.
 
 
 
-## 2. Manual for Users
+## 2. Usage
 
 ### 1. Installing Artiq5 for Windows Users
 
