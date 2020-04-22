@@ -1,1 +1,1 @@
-python -m PyQt5.uic.pyuic -o C:\Users\盛田昭夫\Desktop\IonTrap-WIPM-master\IonTrap-WIPM-master\GUI_Material\QC.py C:\Users\盛田昭夫\Desktop\IonTrap-WIPM-master\IonTrap-WIPM-master\GUI_Material\QC.ui
+python -m PyQt5.uic.pyuic -o C:\Users\盛田昭夫\Desktop\IonTrap-WIPM-master\GUI_Material\QC2_0.py C:\Users\盛田昭夫\Desktop\IonTrap-WIPM-master\GUI_Material\QC2_0.ui
