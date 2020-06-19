@@ -1,19 +1,19 @@
 import sys
 from awg4100 import AwgDevice
 
-local_ip = "192.168.1.10"  # 本机 IP
+local_ip = "192.168.8.10"  # 本机 IP
 
 out_ch = 1
 
 # 定义波形代码
-# sin(x,y)中，x代表的是x MHz，y代表的是运行y ns， x*y/1000 为运行时长内的周期个数
+# sin(x,y),x represents x MHz，y represents running for y ns， x*y/1000 equals to how many periods for the function
 
 wave_code = """
 GAmp = 400;
-w2 = Sin(50, A=200, L=100);
-w3 = Sin(50, A=300, L=100);
-w4 = Sin(50, A=400, L=100);
-s1 = SEQ([w2(1, T), w3(1, C), w4(1,C),w3(1,C),w2(1,C)]);
+w2 = Sin(50, A=200, L=1000);
+w3 = Sin(50, A=300, L=1000);
+w4 = Sin(50, A=400, L=1000);
+s1 = SEQ([w2(1, T), w3(1, C), w4(1,C)]);
 OUT1 = s1;
 OUT2 = s1;
 OUT3 = s1;
@@ -61,7 +61,7 @@ check_ret(rtn, "System Reset failed.")
 rtn, msg = dev.channel_mode(0)      # 选择独立模式
 check_ret(rtn, "set mode failed: {}".format(msg))
 
-rtn, msg = dev.awg_cast_mode(0)     # 播放模式，连续
+rtn, msg = dev.awg_cast_mode(1)     # 播放模式，0-连续, 1-Trig
 check_ret(rtn, "set awg cast mode failed: {}".format(msg))
 
 rtn, msg = dev.awg_offset(out_ch, "10")  # 通道1，AWG 空闲偏置
@@ -80,7 +80,7 @@ if result == 0:
     sys.exit()
 
 # 4. 设置播放次数
-rtn, info = dev.awg_cast_number(0)   
+rtn, info = dev.awg_cast_number(1000000)   
 check_ret(rtn, "set awg cast number failed: {}".format(info))
 
 # 4. 播放控制
