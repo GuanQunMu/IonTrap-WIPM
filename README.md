@@ -2,10 +2,10 @@
 
 Updated on June 22, 2020.
 
-adding the function of AWG
 
 Experimental operations of a single qubit in an ion trap can be realized by this project, including a designed GUI and functions of rabi scan, zeeman scan, and pulse shaping for DDS (will be used in entanglement with 2 ions).
 
+The latest updated: Adding the function of controling the AWG.
 
 ## 1. Introduction
 
