@@ -1,0 +1,1 @@
+start python C:\Users\Administrator\Desktop\IonTrap-WIPM-master\AWG4100-Python64\example_AWG2.py

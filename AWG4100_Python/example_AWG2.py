@@ -8,17 +8,49 @@ out_ch = 1
 # 定义波形代码
 # sin(x,y),x represents x MHz，y represents running for y ns， x*y/1000 equals to how many periods for the function
 
+#wave_code = WAVE('C:\\Users\Administrator\Desktop\wave.wave');
+
+'''
 wave_code = """
-GAmp = 400;
-w2 = Sin(50, A=200, L=1000);
-w3 = Sin(50, A=300, L=1000);
-w4 = Sin(50, A=400, L=1000);
-s1 = SEQ([w2(1, T), w3(1, C), w4(1,C)]);
-OUT1 = s1;
-OUT2 = s1;
-OUT3 = s1;
-OUT4 = s1;
+import math
+GAmp = 200
+
+def func(f):
+    y = []
+    # f 单位 MHz, i 单位 ns
+    for i in range(100):
+        val = 200*math.sin(2*PI*f*i*0.001)
+        y.append(val)
+    return WAVE(y)
+
+f = 140
+w1 = func(f)
+s1 = SEQ([w1(1, T)])
+
+OUT1 = s1
+OUT2 = s1
+
 """
+'''
+
+
+wave_code = """
+
+w2 = Sin(50, A=300, L=100);
+w3 = Sin(50, A=400, L=100);
+w4 = Sin(50, A=500, L=100);
+
+s1 = SEQ([w2(1, T), w3(1, C),w4(1,C)])
+s2 = SEQ([ w4(1, T), w3(1,C),w2(1,C)])
+sf=s1(2)+s2(1)
+
+OUT1 = sf
+OUT2 = s1
+OUT3 = s1
+OUT4 = s1
+
+"""
+
 
 dev = AwgDevice()
 
@@ -80,7 +112,7 @@ if result == 0:
     sys.exit()
 
 # 4. 设置播放次数
-rtn, info = dev.awg_cast_number(1000000)   
+rtn, info = dev.awg_cast_number(100000000)   
 check_ret(rtn, "set awg cast number failed: {}".format(info))
 
 # 4. 播放控制
