@@ -1,8 +1,11 @@
 # The Control System for Quantum Information Process in Ion Traps
 
-Updated on February 1, 2020.
+Updated on June 22, 2020.
 
-This project can be used to realize experimental operations of a single qubit in the ion trap, including rabi scan, zeeman scan, and pulse shaping for rabi scan. Otherwise, for the convenience of experiment, we also Designed a convenient GUI.
+adding the function of AWG
+
+Experimental operations of a single qubit in an ion trap can be realized by this project, including a designed GUI and functions of rabi scan, zeeman scan, and pulse shaping for DDS (will be used in entanglement with 2 ions).
+
 
 ## 1. Introduction
 
@@ -24,10 +27,7 @@ Homepage link: http://english.wipm.cas.cn/rh/rd/yzfzsys/bsqip/bsqipr/
 3. GeYi Ding     -Master at WIPM, CAS
 2. Kamran Rehan   -PhD at WIPM, CAS
 
-If you have some questions or want to be a developer, please contact Guanqun Mu: **guanqun_mu@whu.edu.cn**
-
-And go to ' Manual for Developers.md ' for more details.
-
+If you have any question or you want to be a developer, please contact Guanqun Mu: **guanqun_mu@whu.edu.cn**
 
 
 ## 2. Usage
