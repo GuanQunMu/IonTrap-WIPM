@@ -7,14 +7,6 @@ Experimental operations of a single qubit in an ion trap can be realized by this
 
 The latest updated: Adding the function of controling the AWG.
 
-## 1. Introduction
-
-  By controlling switches, frequency and amplitude of the laser acting on the ions, we can control the quantum state of the ions in ion traps through the principle of quantum optics. we choose FPGA as the experimental control hardware. 
-
-  M-labs' Artiq integrates FPGA, AOM and DDS, and can control experimental processes through Python. based on this,we designed some functions to realize rabi scan and zeeman scan and made a customized GUI, by which physicists can control experiment much easily.
-
-![image](https://github.com/GuanQunMu/IonTrap-WIPM/blob/master/Pictures/Dashboaed.png)
-
 ###  Research group:
 
 MangFeng Ion Trap Group, WIPM, CAS, P. R China
