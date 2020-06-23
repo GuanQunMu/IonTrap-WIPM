@@ -10,46 +10,13 @@ out_ch = 1
 
 #wave_code = WAVE('C:\\Users\Administrator\Desktop\wave.wave');
 
-'''
-wave_code = """
-import math
-GAmp = 200
+with open('C:\\Users\Administrator\Desktop\IonTrap-WIPM-master\AWG4100-Python64\wave.txt', 'r') as f:
+    wave_code=f.read()  #读取波形
+    
+with open('C:\\Users\Administrator\Desktop\IonTrap-WIPM-master\AWG4100-Python64\wave.txt', 'r') as f:
+    first_line = f.readlines()[0]  #读取第一行的Repeat参数
 
-def func(f):
-    y = []
-    # f 单位 MHz, i 单位 ns
-    for i in range(100):
-        val = 200*math.sin(2*PI*f*i*0.001)
-        y.append(val)
-    return WAVE(y)
-
-f = 140
-w1 = func(f)
-s1 = SEQ([w1(1, T)])
-
-OUT1 = s1
-OUT2 = s1
-
-"""
-'''
-
-
-wave_code = """
-
-w2 = Sin(50, A=300, L=100);
-w3 = Sin(50, A=400, L=100);
-w4 = Sin(50, A=500, L=100);
-
-s1 = SEQ([w2(1, T), w3(1, C),w4(1,C)])
-s2 = SEQ([ w4(1, T), w3(1,C),w2(1,C)])
-sf=s1(2)+s2(1)
-
-OUT1 = sf
-OUT2 = s1
-OUT3 = s1
-OUT4 = s1
-
-"""
+exec(first_line)  #将Repeat赋值
 
 
 dev = AwgDevice()
@@ -112,7 +79,7 @@ if result == 0:
     sys.exit()
 
 # 4. 设置播放次数
-rtn, info = dev.awg_cast_number(100000000)   
+rtn, info = dev.awg_cast_number(Repeat)   
 check_ret(rtn, "set awg cast number failed: {}".format(info))
 
 # 4. 播放控制

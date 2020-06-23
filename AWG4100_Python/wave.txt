@@ -1,0 +1,20 @@
+Repeat=100  
+Fstart=50
+Fstep=1
+Rounds=50
+Amp=500
+Len=1000
+
+
+
+wave_list = []
+for i in range(Rounds):
+    _w = Sin(Fstart + Fstep *(i), A=Amp , L=Len)
+    wave_list.append(_w(1,T))
+    
+s1 = SEQ(wave_list);
+
+OUT1 = s1;
+OUT2 = s1;
+
+
