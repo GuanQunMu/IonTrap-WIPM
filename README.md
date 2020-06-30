@@ -1,6 +1,6 @@
 # The Control System for Quantum Information Process in Ion Traps
 
-Updated on June 22, 2020.
+Updated on June 30, 2020, The frequency reading of wave length meters has been added
 
 
 Experimental operations of a single qubit in an ion trap can be realized by this project, including a designed GUI and functions of rabi scan, zeeman scan, and pulse shaping for DDS (will be used in entanglement with 2 ions).
