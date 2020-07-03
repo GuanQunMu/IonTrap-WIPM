@@ -25,7 +25,11 @@ class TCPIP_LaserFrequency(EnvExperiment):
         
         # 设置光速
         # Define the speed of the light
-        C_Chamber=2997924559
+        C_Chamber=299792.458
+        
+        # 设置397与866的失谐量标定值
+        Standard_397=755.222800
+        Standard_866=346.000280
 
         while 1:
             
@@ -33,48 +37,70 @@ class TCPIP_LaserFrequency(EnvExperiment):
             # Recieve the data from the Client
             rev_data = conn.recv(1024).decode('GB2312')
             
-            #数据类型为：[X,Y], X 为激光的参数， Y 为激光的波长
-            #The data should be like: [X,Y],X is the number of the laser,Y is nanometer.
+            #数据类型为：X Y, X 为激光的参数， Y 为激光的波长
+            #The data should be like: X Y,X is the number of the laser,Y is nanometer.
             rev_array = rev_data.split()
             
             # 根据收集到的信息来对特定的激光频率赋值
             # brodcast the frequency of lasers according to the number of the laser
+            
+            # NA
             if rev_array[0]=="1":
                 data_nm = float(rev_array[1])
-                data_frequency = format(C_Chamber/(data_nm*10**4), '.5f')
-                self.set_dataset("Laser1", float(data_frequency), broadcast=True)
+                data_frequency = C_Chamber/data_nm
+                self.set_dataset("Laser1", float(format(data_frequency, '.6f')), broadcast=True)
+                
+            # 866
             elif rev_array[0]=="2":
                 data_nm = float(rev_array[1])
-                data_frequency = format(C_Chamber/(data_nm*10**4), '.5f')
-                self.set_dataset("Laser2", float(data_frequency), broadcast=True)
+                data_frequency = C_Chamber/data_nm
+                data_deturning = (data_frequency-Standard_866)*10**6
+                
+                self.set_dataset("Laser2", float(format(data_frequency, '.6f')), broadcast=True)
+                self.set_dataset("Deturning866", float(format(data_deturning, '.0f')), broadcast=True)
+                
+            # 729
             elif rev_array[0]=="3":
                 data_nm = float(rev_array[1])
-                data_frequency = format(C_Chamber/(data_nm*10**4), '.5f')
-                self.set_dataset("Laser3", float(data_frequency), broadcast=True)
+                data_frequency = C_Chamber/data_nm
+                self.set_dataset("Laser3", float(format(data_frequency, '.6f')), broadcast=True)
+                
+            # 423
             elif rev_array[0]=="4":
                 data_nm = float(rev_array[1])
-                data_frequency = format(C_Chamber/(data_nm*10**4), '.5f')
-                self.set_dataset("Laser4", float(data_frequency), broadcast=True)
+                data_frequency = C_Chamber/data_nm
+                self.set_dataset("Laser4", float(format(data_frequency, '.6f')), broadcast=True)
+            
+            # 397
             elif rev_array[0]=="5":
                 data_nm = float(rev_array[1])
-                data_frequency = format(C_Chamber/(data_nm*10**4), '.5f')
-                self.set_dataset("Laser5", float(data_frequency), broadcast=True)
+                data_frequency = C_Chamber/data_nm
+                data_deturning = (data_frequency-Standard_397)*10**6
+                
+                self.set_dataset("Laser5", float(format(data_frequency, '.6f')), broadcast=True)
+                self.set_dataset("Deturning397", float(format(data_deturning, '.0f')), broadcast=True)
+                
+            # 854
             elif rev_array[0]=="6":
                 data_nm = float(rev_array[1])
-                data_frequency = format(C_Chamber/(data_nm*10**4), '.5f')
-                self.set_dataset("Laser6", float(data_frequency), broadcast=True)
+                data_frequency = C_Chamber/data_nm
+                self.set_dataset("Laser6", float(format(data_frequency, '.6f')), broadcast=True)
+            
+            # NA
             elif rev_array[0]=="7":
                 data_nm = float(rev_array[1])
-                data_frequency = format(C_Chamber/(data_nm*10**4), '.5f')
-                self.set_dataset("Laser7", float(data_frequency), broadcast=True)
+                data_frequency = C_Chamber/data_nm
+                self.set_dataset("Laser7", float(format(data_frequency, '.6f')), broadcast=True)
+            
+            # NA
             elif rev_array[0]=="8":
                 data_nm = float(rev_array[1])
-                data_frequency = format(C_Chamber/(data_nm*10**4), '.5f')
-                self.set_dataset("Laser8", float(data_frequency), broadcast=True)
+                data_frequency = C_Chamber/data_nm
+                self.set_dataset("Laser8", float(format(data_frequency, '.6f')), broadcast=True)
                 
-            # 设置刷新时间
+            # 设置每个数据的刷新时间
             # Set the period for updating
-            time.sleep(0.2)
+            time.sleep(0.1)
             
             # 服务端给客户端回消息
             # Send the message back to the Client
