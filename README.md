@@ -22,6 +22,9 @@ Homepage link: http://english.wipm.cas.cn/rh/rd/yzfzsys/bsqip/bsqipr/
 
 If you have any question or you want to be a developer, please contact Guanqun Mu: **guanqun_mu@whu.edu.cn**
 
+## 1. Introduction
+
+<img src="/Pictures/GUI2.1.png" width="100%"><small>(c)</small>
 
 ## 2. Usage
 
