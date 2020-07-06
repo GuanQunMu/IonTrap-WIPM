@@ -28,7 +28,7 @@ If you have any question or you want to be a developer, please contact Guanqun M
 
 ARTIQ was initiated by the Ion Storage Group at NIST. Based on this, we developed the control system for quantum information process in ion traps. It can support rabi scan, zeeman scan and paulse shaping for DDS. Furthermore, We developed a GUI and attached AWG (Arbitrary waveform generator) and the data from wave length meter with this control system.
 
-<img src="/Pictures/structure.png" width="100%">
+<img src="/Pictures/structure.png" width="70%">
 
 ## 2. Usage
 
