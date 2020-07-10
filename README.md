@@ -34,22 +34,20 @@ ARTIQ was initiated by the Ion Storage Group at NIST. Based on this, we develope
 
 ### 1. Installing Artiq5 for Windows Users
 
-1. Come to the link of script: <https://raw.githubusercontent.com/m-labs/artiq/release-5/install-with-conda.py> , copy all the script.
-2. Create a new python file on your desktop, copy the script into the file.  Name it with `artiq_script.py`
+1. Go to this link: <https://raw.githubusercontent.com/m-labs/artiq/release-5/install-with-conda.py> , copy all the script.
+2. Create a new python file, Paste the script in the file.  Name it with `artiq_script.py`
 3. Command Prompt:  `$ python artiq_script.py `
-4. After minutes, packages Artiq5 will be installed in your PC.
+4. After few minutes, the packages of Artiq5 will be installed.
 
 
 
 ### 2. Preparing
 
-1. Creating a new folder, name it with `Artiq_WIPM`.
-2. Create a new folder called `repository` inside `Artiq_WIPM`.
-3. Copy the file `device_db.py` into the `Artiq_WIPM`. This file should be given by M-Labs guys.
-4. Click the button ' Clone or download ' of this project.
-5. Click ' Download ZIP '.
-6. Uncompress the .zip file, copy the folder `repository` to recover the same name folder in `Artiq_WIPM`.
-7. Command Prompt:
+1. Download this project, Uncompress it.
+
+2. Replace the initial 'device_db.py' with the latest 'device_db.py' in the folder. Then Change the IP data in the 'device_db.py' to the IP of the Artiq hardware. (If you have not bought the hardware from M-Labs, just skip it)
+
+3. Command Prompt:
 
     `$ activate artiq  `
 
@@ -57,26 +55,25 @@ ARTIQ was initiated by the Ion Storage Group at NIST. Based on this, we develope
 
     `$ artiq_master`
 
-8. Turn on another Command Prompt:
+4. Then turn on another Command Prompt:
 
     `$ activate artiq`
 
     `$ artiq_dashboard`
 
-
+5. Now the dashboard of Artiq should appear. It is remarkable that if you skip the procedure2, you may not succeed to connect the hardware of Artiq, but you can still run codes without @kernel.
 
 
 
 ### 3. Getting Start
 
-1. Go to the ' Explorer ' part in dashboard, click the ' GUIFinal ' operation, set the pipeline to 'GUI', then click ' Submit ' button.
+1. Find the ' Explorer ' part in the dashboard, double click the latest ' GUI ' operation, set the pipeline to 'GUI', then click ' Submit ' button.
 
-2. GUI will come out, change parameters (Rabi Scan/Zeeman Scan/...) , select one choice in ' Selection ' part, then Click ' Submit '.
+2. After the GUI appears, change parameters (Rabi Scan/Zeeman Scan/...) and select a running mode, then click thhe 'Submit' botton on the GUI.
 
 <img src="https://github.com/GuanQunMu/IonTrap-WIPM/blob/master/Pictures/GUI1.0.png" width="400"/>
 
-3. Go to the ' Explorer ' part in dashboard, select the ' Run ' operation, then click ' Submit ' button.
+3. double click the latest ' Run ' operation in the ' Explorer ' part, set the pipeline to 'main', then click ' Submit ' button.
 
-4. After opreation done, photon count picture will appear at Applet.
 
 
