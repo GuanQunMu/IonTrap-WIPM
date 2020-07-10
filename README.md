@@ -71,8 +71,6 @@ ARTIQ was initiated by the Ion Storage Group at NIST. Based on this, we develope
 
 2. After the GUI appears, change parameters (Rabi Scan/Zeeman Scan/...) and select a running mode, then click thhe 'Submit' botton on the GUI.
 
-<img src="https://github.com/GuanQunMu/IonTrap-WIPM/blob/master/Pictures/GUI1.0.png" width="400"/>
-
 3. double click the latest ' Run ' operation in the ' Explorer ' part, set the pipeline to 'main', then click ' Submit ' button.
 
 
