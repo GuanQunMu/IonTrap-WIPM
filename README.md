@@ -55,7 +55,7 @@ ARTIQ was initiated by the Ion Storage Group at NIST. Based on this, we develope
 
     `$ cd \Artiq_WIPM`
 
-    `$ artiq_main`
+    `$ artiq_master`
 
 8. Turn on another Command Prompt:
 
