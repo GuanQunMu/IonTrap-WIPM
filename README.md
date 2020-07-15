@@ -84,7 +84,7 @@ ARTIQ was initiated by the Ion Storage Group at NIST. Based on this, we develope
 
 3. Submit the 'TCPIP_LaserFrequency' in the 'Explorer' to build a server with the Artiq, then run the 'CallBackDemoTest.py' file to build a client with Python. Therefore, the connection between Artiq and wavelength meter will be build so the frequency of lasers will be displayed on the dashboard.
 
-#### 2. If you want use this project to control the AWG from the CIQTEK (国仪量子), please follow:
+#### 2. If you want control the AWG from the CIQTEK (国仪量子) with this project, please follow:
 
 1. Change the IP address in the '\AWG4100-Python64\example_AWG2.py' to the IP adress of your AWG.
 
