@@ -1,4 +1,4 @@
-# The Control System for Quantum Information Process in Ion Traps
+# The Control System for Quantum Information Processing in Ion Traps
 
 >Updated on July 02, 2020  
 The frequency reading of lasers has been added  
