@@ -3,9 +3,17 @@ import numpy as np
 import os 
 import time 
 
-class Run2(EnvExperiment):
-    """test zeeman1.1"""
+class Run1(EnvExperiment):
+    """Spin_Echo_CPMG"""
     def build(self):
+        
+        self.setattr_argument("CPMG_time", NumberValue(100, scale=1,unit="times",step=1))
+        self.setattr_argument("Rabi_Time", NumberValue(100, scale=1,unit="us",step=1))
+        self.setattr_argument("Gap_Start", NumberValue(100, scale=1,unit="us",step=1))
+        self.setattr_argument("Gap_End", NumberValue(100, scale=1,unit="us",step=1))
+        self.setattr_argument("Gap_Step", NumberValue(100, scale=1,unit="ns",step=1))
+        
+    
     
         self.setattr_device("core")
         self.setattr_device("ttl0")
@@ -28,22 +36,28 @@ class Run2(EnvExperiment):
     def prepare(self):
     
         self.parameter=self.get_dataset("para")
-        #self.Rabi_Start=self.get_dataset("Run_Uint.Rabi.Start")
-        #self.Rabi_End=self.get_datase================================================m'm'm'm'm'm'm'm'm'm'm'm'm'm'm'm'm'm'mt("Run_Uint.Rabi.End")
-        #.Rabi_Step=self.get_dataset("Run_Uint.Rabi.Step")
+        self.Rabi=self.get_dataset("Run_Uint.Rabi.Start")
+        self.Rabi_End=self.get_dataset("Run_Uint.Rabi.End")
+        self.Rabi_Step=self.get_dataset("Run_Uint.Rabi.Step")
+        self.Rabi_Frequency=self.get_dataset("Run_Uint.Rabi.Start")
         self.Zeeman_Frequency=self.get_dataset("Run_Uint.Zeeman.Start")
-        self.Zeeman_Frequency_End=self.get_dataset("Run_Uint.Zeeman.End")
-        self.Zeeman_Frequency_Step=self.get_dataset("Run_Uint.Zeeman.Step")
-        self.Zeeman_Repeat=self.get_dataset("Run_Uint.Zeeman.Repeat")
-        self.Zeeman_Threshould=self.get_dataset("Run_Uint.Zeeman.Threshould")
-        #self.Rabi_Threshould=self.get_dataset("Run_Uint.Rabi.Threshould")
+        #self.Zeeman_Frequency_End=self.get_dataset("Run_Uint.Zeeman.End")
+        #self.Zeeman_Frequency_Step=self.get_dataset("Run_Uint.Zeeman.Step")
+        #self.Zeeman_Repeat=self.get_dataset("Run_Uint.Zeeman.Repeat")
+        #self.Zeeman_Threshould=self.get_dataset("Run_Uint.Zeeman.Threshould")
+        self.Rabi_Threshould=self.get_dataset("Run_Uint.Rabi.Threshould")
 
         self.Preparation_Frequency=self.get_dataset("Run_Uint.Preparation.Frequency")
         self.Preparation_Attenuation=self.get_dataset("Run_Uint.Preparation.Attenuation")
         self.Zeeman_Attenuation=self.get_dataset("Run_Uint.Zeeman.Attenuation")
         
-        self.length=int((self.Zeeman_Frequency_End-self.Zeeman_Frequency)/(self.Zeeman_Frequency_Step/1000))+1
         
+        self.Gap=self.Gap_Start
+        self.length=int((self.Gap_End-self.Gap)/(self.Gap_Step/1000))+1
+        # 化小数为整数
+        self.CPMG_time=int(self.CPMG_time)
+        
+        print(self.length)
         
     @kernel
     def run(self):
@@ -67,7 +81,6 @@ class Run2(EnvExperiment):
         self.ttl11.output()
         self.ttl12.output()
         self.ttl30.output()
-        self.ttl31.output()
         delay(2*ms)
 
         self.urukul0_ch0.set(self.Preparation_Frequency*MHz)#设置729态制备频率
@@ -76,71 +89,78 @@ class Run2(EnvExperiment):
         
         delay(50*ms)
         
-        if self.parameter==2:
+        if self.parameter==1:
             # self.length=int((self.Zeeman_Frequency_End-self.Zeeman_Frequency)/(self.Zeeman_Frequency_Step/1000))
             
-            self.set_dataset("FrequncyList", np.full(self.length, np.nan), broadcast=True)
+            self.set_dataset("GapList", np.full(self.length, np.nan), broadcast=True)
             self.set_dataset("D_List", np.full(self.length, np.nan), broadcast=True)
             
             self.set_dataset("Data", np.full(self.length, np.nan), broadcast=True)
             
             delay(1*ms)
             
-            print(self.Zeeman_Frequency)
-            print(self.Zeeman_Frequency_End)
-            print(self.Zeeman_Frequency_Step/1000)
+            print(self.Rabi)
+            print(self.Rabi_End)
+            print(self.Rabi_Step/1000)
             
             delay(2*ms)
             
             t=0
             
-            while self.Zeeman_Frequency<self.Zeeman_Frequency_End:
+            
+            while self.Gap<=self.Gap_End:
                 
                 a=0
                 
                 delay(1*ms)
-                for i in range(100):
+                for i in range(10):
                     
                     t_end=self.ttl0.gate_rising(20*ms)#从当前时刻开始记录上升沿，直到括号内的时间为止。
                     t_edge=self.ttl0.timestamp_mu(t_end) 
                     
-                
+                    
                     if t_edge>0:#如果探测到触发信号的上
                         at_mu(t_edge)
                         
                         delay(4*ms)
                         print(t_edge)
                         
-                        self.urukul0_ch1.set(self.Zeeman_Frequency*MHz)
+                        self.urukul0_ch1.set(self.Rabi_Frequency*MHz)
+                        #多普勒冷却
                         self.ttl30.on()
                         self.ttl4.on()#打开854Double Pass的AOM
                         delay(2000*us)
                         self.ttl30.off()
                         self.ttl4.off()
-                        self.ttl8.on()#打开729
                         #态制备
+                        self.ttl8.on()#打开729
                         delay(100*us)#持续态制备时长
                         self.ttl8.off()
-                        self.ttl4.on()#将三维冷却的397光打开
+                        self.ttl4.on()
                         self.ttl5.on()#将z方向的397光打开
                         self.ttl12.on()
                         delay(100*us)
                         self.ttl4.off()
                         self.ttl5.off()
                         self.ttl12.off()#关掉397Double Pass的光
+                        #边带冷却
+                        #边带冷却次数
+                        self.ttl4.on()#打开854Double Pass的AOM
+                        for e in range(10):
+                            delay(8*us)
+                            self.ttl8.on()#打开729
+                            delay(1*us)
+                            self.ttl8.off()
+                            
+                        self.ttl4.off()#关闭854Double Pass的AOM
                         
-                        #扫描Zeeman
-                        self.ttl2.on()#将三维冷却的397光打开
-                        self.ttl4.on()#将z方向的397光打开
-                        self.ttl5.on()
-                        self.ttl11.on()
-                        self.ttl12.on()
-                        delay(2000*us)#持续Zeeman扫描时长
-                        self.ttl2.off()
-                        self.ttl4.off()
-                        self.ttl5.off()
-                        self.ttl11.off()
-                        self.ttl12.off()
+                        #态操作
+                        
+                        for e in range(self.CPMG_time):
+                            delay(self.Gap*us)
+                            self.ttl8.on()#打开729
+                            delay(self.Rabi*us)
+                            self.ttl8.off()
                         
                         #态探测
                         self.ttl2.on()#打开397Double Pass的AOM
@@ -151,10 +171,10 @@ class Run2(EnvExperiment):
                         self.ttl5.off()#打开397态探测的AOM
                         self.ttl9.off()# 
                         num_rising_edges=self.ttl1.count(gate_end_mu)
-             
+            
                         self.set_dataset("Photon_Count",num_rising_edges, broadcast=True)
-                        #计数上升沿
-                        if num_rising_edges>self.Zeeman_Threshould:
+                        #计数上升沿   
+                        if num_rising_edges>self.Rabi_Threshould:
                             a+=1
                         
                         self.core.reset()
@@ -163,20 +183,14 @@ class Run2(EnvExperiment):
                 
                 D=1-a/100
                 
-                self.mutate_dataset("FrequncyList", t, self.Zeeman_Frequency)
+                self.mutate_dataset("GapList", t, self.Gap)
                 self.mutate_dataset("D_List", t, D)
                 
                 t+=1
                 
-                self.Zeeman_Frequency+=self.Zeeman_Frequency_Step/1000
+                self.Gap+=self.Gap_Step/1000
                     
                     
-                    
-                    
-
-            
-            
-            
     def analyze(self):
 
         try:
@@ -187,10 +201,10 @@ class Run2(EnvExperiment):
             pass
             
         D_List=self.get_dataset("D_List")
-        FrequncyList=self.get_dataset("FrequncyList")
+        FrequncyList=self.get_dataset("GapList")
         
         
-        name1=time.strftime("%H-%M-%S")+"-Zeeman"
+        name1=time.strftime("%H-%M-%S")+"-SpinEcho"
         filename1=filename+"/"+str(name1)
         
         file=open(filename1+".txt","a")
