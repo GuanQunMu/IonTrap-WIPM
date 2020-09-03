@@ -19,7 +19,7 @@ Homepage link: http://english.wipm.cas.cn/rh/rd/yzfzsys/bsqip/bsqipr/
 3. GeYi Ding     -PhD Student at WIPM, CAS
 2. Kamran Rehan   -PhD at WIPM, CAS
 
-If you have any question or you want to be a developer, please contact Guanqun Mu: **guanqun_mu@whu.edu.cn**
+If you have any question using it or have any suggestion, please contact Guanqun Mu: **guanqun_mu@whu.edu.cn**
 
 ## 1. Introduction
 
