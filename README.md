@@ -33,11 +33,7 @@ ARTIQ was initiated by the Ion Storage Group at NIST. Based on this, we develope
 
 ### 1. Installing Artiq5 for Windows Users
 
-1. Go to this link: <https://raw.githubusercontent.com/m-labs/artiq/release-5/install-with-conda.py> , copy all the script.
-2. Create a new python file, Paste the script in the file.  Name it with `artiq_script.py`
-3. Command Prompt:  `$ python artiq_script.py `
-4. After few minutes, the packages of Artiq5 will be installed.
-
+This part has been updated by M-Labs, to see the latest procedue, please follow: https://m-labs.hk/artiq/manual/installing.html
 
 
 ### 2. Preparing
