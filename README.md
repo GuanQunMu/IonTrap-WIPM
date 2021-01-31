@@ -15,7 +15,7 @@ Homepage link: http://english.wipm.cas.cn/rh/rd/yzfzsys/bsqip/bsqipr/
 
 ###  Contributors:
 
-1. Guanqun Mu     -Research Assistant (was the undergraduate at Wuhan University)
+1. Guanqun Mu     -Research Assistant (was an undergraduate at Wuhan University)
 3. GeYi Ding     -PhD Student at WIPM, CAS
 2. Kamran Rehan   -PhD at WIPM, CAS
 
